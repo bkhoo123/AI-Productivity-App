@@ -15,7 +15,17 @@ export default async function handler(req, res) {
             messages: [
                 {
                     role: "system",
-                    content: "You are assisting the user by becoming a cover letter generator. You will be given a job title, company, and skills and you will need to generate a cover letter for the user."
+                    content: "You are assisting the user by becoming a cover letter generator. You will be given the resume of the user and the company they are trying to apply to. You are going to create a personalized cover letter for the position."
+                },
+                {
+                    role: "user",
+                    content: `I need help creating a personalized cover letter for the company based on my resume. 
+                    I want you to create a cover letter that is personalized to the company and position. 
+                    I want you to connect my resume with the job description and if I'm lacking any skills I want you to explain that I will bridge the gap on any part of the job description that I am lacking.`
+                },
+                {
+                    role: "assistant",
+                    content: "Yes I can help you with your cover letter. Can you please send me your resume?"
                 }
             ],
             max_tokens: 500,

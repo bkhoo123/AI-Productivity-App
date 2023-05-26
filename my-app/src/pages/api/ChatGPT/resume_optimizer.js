@@ -27,10 +27,11 @@ export default async function handler(req, res) {
                     content: `I need help with making improvements to my resume. The format should be in the following order and I would like you to section off each part with a ## header: 
                     1. I want feedback and suggestions on each section of my resume. 
                     2. Based on my resume where are areas I could optimize for the ATS scanner?
-                    3. I would like my bullet points optimized and utilizing the skills / technologies if you see room for improvement, but if its already mostly optimized you can skip over them.   
+                    3. I would like my bullet points optimized and utilizing the skills / technologies if you see room for improvement, but if its already mostly optimized you can skip over them. If you improve them show an arrow -> with the improvementF   
                     4. Based on the given job in the resume give me a few skill suggestions that you think I should add to my resume.
                     5. If you could rewrite the resume how would you rewrite it and why?
-                    6. Give me a rating from 1-10 of how likely my resume would pass the ATS Scanner.
+                    6. Give me your thoughts on the overall format of my resume and how I can improve it.
+                    7. Give me a score from 1-100 of how likely my resume would pass the ATS Scanner.
                     `
                 },
                 {
