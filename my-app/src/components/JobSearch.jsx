@@ -10,6 +10,7 @@ import axios from 'axios'
 import ToolTips from './ToolTips';
 import ResumeTemplate from './JobSearchComponents/ResumeTemplate';
 import ResumeOptimizer from './JobSearchComponents/ResumeOptimizer';
+import CoverLetterOptimizer from './JobSearchComponents/CoverLetterOptimizer';
 
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -72,7 +73,9 @@ const JobSearch = () => {
 
     const Panel = {
         "Resume Template": <ResumeTemplate toggleReview={toggleReview} setToggleReview={setToggleReview} loading={loading} setLoading={setLoading} content={content} setContent={setContent} />,
-        "Resume Optimizer": <ResumeOptimizer/>
+        "Resume Optimizer": <ResumeOptimizer/>,
+        
+
     }
 
     return (
@@ -82,11 +85,20 @@ const JobSearch = () => {
             <div className="h-24 p-6">
                 <div className="flex flex-row gap-x-4 mx-2 gap-4 flex-wrap">
 
-                <button 
+                {/* <button 
                 onClick={() => {
                     setToggleReview(!toggleReview)
                     setCurrent("Resume Template")
                 }} 
+                className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400 flex">
+                    Resume Template 
+                    <ToolTips 
+                    description={"Engineered to have the AI help you get started with a resume template just need some information and you're good to go."} 
+                    how={"Click the Resume Template Button and then a Popup should appear. In the popup its going to ask you to fill out some information to help the AI create a Resume Template"}/>
+                </button> */}
+
+                <button 
+                onClick={() => setCurrent("Resume Template") }
                 className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400 flex">
                     Resume Template 
                     <ToolTips 
@@ -103,7 +115,14 @@ const JobSearch = () => {
                     how={"Paste your Resume in the Text Editor Below. Click the Resume Optimizer and then the AI will parse through your resume and give you feedback."} /> 
                 </button>
 
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Create Cover Letter</button>
+                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400 flex">
+                    Create Cover Letter
+                    <ToolTips
+                    description={"Creates a Cover Letter for you with the help of artificial intelligence."}
+                    how={"Click the Create Cover Letter Button and then a Popup should appear. In the popup its going to ask you to fill out some information to help the AI create a Cover Letter"}
+                    />
+                </button>
+
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Cover Letter Optimizer</button>
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Follow Up Note</button>
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Thank You Note</button>
