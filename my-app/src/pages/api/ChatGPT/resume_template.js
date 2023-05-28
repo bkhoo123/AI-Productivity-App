@@ -24,15 +24,15 @@ export default async function handler(req, res) {
                 },
                 {
                     role: "assistant",
-                    content: "Yes I can help you with your resume template. What is your job title, where are you trying to work, and what is your skill set?"
+                    content: "Yes I can help you with your resume template. What is your job title, which company are you trying to work at, and what is your skill set?"
                 },
                 {
                     role: "user",
-                    content: `I am a ${title}, I am trying to work at ${company} and my skill set is ${skills}.`
+                    content: `I am a ${title}, I am trying to work at this ${company} and my skill set is ${skills}.`
                 }
             ],
             max_tokens: 500,
-            top_p: 0.1,
+            temperature: 0.5,
             n: 1,
         })
 

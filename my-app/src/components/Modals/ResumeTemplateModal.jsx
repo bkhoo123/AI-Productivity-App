@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-const ResumeTemplateModal = ({toggleReview, setToggleReview, GPTReply, setGPTReply, loading, setLoading}) => {
+const ResumeTemplateModal = ({toggleDark, setToggleDark, GPTReply, setGPTReply, loading, setLoading}) => {
     const [title, setTitle] = useState("")
     const [company, setCompany] = useState("")
     const [skills, setSkills] = useState("")
@@ -20,12 +20,12 @@ const ResumeTemplateModal = ({toggleReview, setToggleReview, GPTReply, setGPTRep
         if (response) {
             setGPTReply(response.data.message.content)
             setLoading(false)
-            setToggleReview(false)
+            setToggleDark(false)
         }
     }
 
     return (
-        <div className={toggleReview ? "absolute left-[37.5%] top-[15%] bg-blue-50 z-50 h-auto w-[40%] rounded-lg p-10" : "hidden"}>
+        <div className={toggleDark ? "absolute left-[37.5%] top-[15%] bg-blue-50 z-50 h-auto w-[40%] rounded-lg p-10" : "hidden"}>
             
             <form onSubmit={handleResumeTemplate} className="">
                 <label className="flex flex-col gap-4 mb-4 text-center text-lg font-semibold">
@@ -66,7 +66,7 @@ const ResumeTemplateModal = ({toggleReview, setToggleReview, GPTReply, setGPTRep
                 </label>
                 <div className="flex justify-center items-center w-full gap-6 pt-4">
                 <button type="submit" className="p-2 bg-indigo-400 rounded-md text-white font-semibold px-3 hover:bg-stone-400">Submit</button>
-                <button type="button" onClick={() => setToggleReview(false)} className="p-2 bg-indigo-400 rounded-md text-white font-semibold px-4 hover:bg-stone-400">Close</button>
+                <button type="button" onClick={() => setToggleDark(false)} className="p-2 bg-indigo-400 rounded-md text-white font-semibold px-4 hover:bg-stone-400">Close</button>
                 </div>
             </form>
 
