@@ -10,27 +10,7 @@ import ToolTips from './ToolTips';
 import Resume from './JobSearchComponents/Resume';
 import CoverLetter from './JobSearchComponents/CoverLetter';
 import CoverLetterOptimizer from './JobSearchComponents/CoverLetter/CoverLetterOptimizer';
-
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-
-
-const QuillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean'],
-    ],
-}
-
-const QuillFormats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-]
+import Notes from './JobSearchComponents/Notes';
 
 const JobSearch = () => {
     const [content, setContent] = useState("")
@@ -55,20 +35,20 @@ const JobSearch = () => {
     const Panel = {
         "Resume": <Resume toggleDark={toggleDark} setToggleDark={setToggleDark} content={content} setContent={setContent} />,
         "Cover Letter": <CoverLetter/>,
-        
+        "Notes": <Notes/>
 
     }
 
     return (
         <div className={`w-full ${toggleDark ? "bg-gray-600" : "bg-white"}`}>
-            <NavBar title={current} setCurrent={setCurrent} />
+            {/* <NavBar title={current} setCurrent={setCurrent} /> */}
 
             <div className="h-24 p-6">
-                <div className="flex flex-row gap-x-4 mx-2 gap-4 flex-wrap">
+                <div className="flex flex-row gap-x-8 mx-2 gap-4 flex-wrap">
 
                 <button 
                 onClick={() => setCurrent("Resume") }
-                className={current === "Resume" ? "bg-stone-400 p-2 text-white text-sm rounded-md font-semibold flex" : "bg-teal-500 p-2 text-white text-sm rounded-md font-semibold flex"}>
+                className={`font-semibold flex items-center ${current === "Resume" ? "border-b-2 border-indigo-400" : ""}`}>
                     Resume
                     <ToolTips 
                     description={"Resume Creation and Optimization Tools and Features"} 
@@ -78,14 +58,17 @@ const JobSearch = () => {
 
                 <button  
                 onClick={() => setCurrent("Cover Letter")}
-                className={current === "Cover Letter" ? "bg-stone-400 p-2 text-white text-sm rounded-md font-semibold flex" : "bg-teal-500 p-2 text-white text-sm rounded-md font-semibold flex"}>
+                className={`font-semibold flex items-center ${current === "Cover Letter" ? "border-b-2 border-indigo-400" : ""}`}>
                     Cover Letter
                     <ToolTips 
                     description={"Cover Letter Creation and Optimization Tools and Features"} 
                     how={"Click the Cover Letter Button and you should see the Cover Letter Tools appear below"} /> 
                 </button>
 
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Follow Up Note</button>
+                <button
+                onClick={() => setCurrent("Notes")} 
+                className={`font-semibold flex items-center ${current === "Notes" ? "border-b-2 border-indigo-400" : ""}`}>
+                    Notes to Recruiters</button>
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Thank You Note</button>
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Interview Simulation</button>
                 <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Complete Package</button>

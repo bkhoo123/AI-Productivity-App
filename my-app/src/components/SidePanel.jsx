@@ -13,9 +13,9 @@ const SidePanel = ({activePanel, setActivePanel}) => {
 
             <div className="flex justify-start flex-col mt-4">
 
-                <div onClick={() => {setActivePanel("JobSearch"); setCurrent("JobSearch")}} className={current === "JobSearch" ? "text-slate-600 font-bold w-full p-4 cursor-pointer bg-teal-200" : "text-slate-600 font-bold w-full p-4 cursor-pointer" }> Job Search</div>
+                <div onClick={() => {setActivePanel("JobSearch"); setCurrent("JobSearch")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "JobSearch" ? "border-l-4 border-indigo-500" : ""}`}> Job Search</div>
 
-                <div onClick={() => {setActivePanel("Ebay"); setCurrent("Ebay")}} className={current === "Ebay" ? "text-slate-600 font-bold w-full p-4 cursor-pointer bg-indigo-200" : "text-slate-600 font-bold w-full p-4 cursor-pointer" }>eBay</div>
+                <div onClick={() => {setActivePanel("Ebay"); setCurrent("Ebay")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Ebay" ? "border-l-4 border-indigo-500" : ""}`}>eBay</div>
 
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Personal</div>
 
