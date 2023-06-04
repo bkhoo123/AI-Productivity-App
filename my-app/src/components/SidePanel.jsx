@@ -17,7 +17,7 @@ const SidePanel = ({activePanel, setActivePanel}) => {
 
                 <div onClick={() => {setActivePanel("Ebay"); setCurrent("Ebay")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Ebay" ? "border-l-4 border-indigo-500" : ""}`}>eBay</div>
 
-                <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Personal</div>
+                <div onClick={() => {setActivePanel("Personal"); setCurrent("Personal")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Personal" ? "border-l-4 border-indigo-500" : ""}`}>Personal</div>
 
                 <div onClick={() => {setActivePanel("Dating"); setCurrent("Dating")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Dating" ? "border-l-4 border-indigo-500" : ""}`}>Dating</div>
 
