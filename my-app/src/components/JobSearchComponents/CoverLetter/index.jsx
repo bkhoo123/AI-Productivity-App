@@ -12,7 +12,7 @@ const CoverLetter = () => {
     }
 
     return (
-        <div className="mt-10 border-t border-rose-400 pt-8" >
+        <div className="mt-10 border-t border-indigo-400 pt-8" >
             <h1 className="ml-10 font-bold text-2xl">{current}</h1> 
             <div className="mt-6 ml-10 flex flex-row items-center gap-6 self-center">
                 <button 

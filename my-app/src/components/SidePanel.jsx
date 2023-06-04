@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 
 const SidePanel = ({activePanel, setActivePanel}) => {
-    const [current, setCurrent] = useState("")
+    const [current, setCurrent] = useState("Job Search")
 
     
     return (
@@ -19,9 +19,11 @@ const SidePanel = ({activePanel, setActivePanel}) => {
 
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Personal</div>
 
+                <div onClick={() => {setActivePanel("Dating"); setCurrent("Dating")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Dating" ? "border-l-4 border-indigo-500" : ""}`}>Dating</div>
+
+
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Productivity</div>
-                
-                <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">URL Summarizer</div>
+
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">
                 <img src="https://ik.imagekit.io/aifinder/logos/Midjourney.webp" 
                 className="h-10 w-10 inline-block mx-2"
@@ -30,7 +32,6 @@ const SidePanel = ({activePanel, setActivePanel}) => {
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Coding</div>
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Sentiment Analysis</div>
                 <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Translation</div>
-                <div className="text-slate-600 font-bold hover:bg-orange-200 w-full p-4 cursor-pointer">Overview</div>
                 
 
                 <button  className="flex gap-4 pl-6 flex-row items-center bg-indigo-200 py-4 text-sm">

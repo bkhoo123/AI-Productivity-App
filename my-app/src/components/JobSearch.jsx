@@ -11,6 +11,7 @@ import Resume from './JobSearchComponents/Resume';
 import CoverLetter from './JobSearchComponents/CoverLetter';
 import CoverLetterOptimizer from './JobSearchComponents/CoverLetter/CoverLetterOptimizer';
 import Notes from './JobSearchComponents/Notes';
+import InterviewPrep from './JobSearchComponents/InterviewPrep';
 
 const JobSearch = () => {
     const [content, setContent] = useState("")
@@ -35,7 +36,8 @@ const JobSearch = () => {
     const Panel = {
         "Resume": <Resume toggleDark={toggleDark} setToggleDark={setToggleDark} content={content} setContent={setContent} />,
         "Cover Letter": <CoverLetter/>,
-        "Notes": <Notes/>
+        "Notes": <Notes/>,
+        "Interview Prep": <InterviewPrep/>,
 
     }
 
@@ -43,8 +45,8 @@ const JobSearch = () => {
         <div className={`w-full ${toggleDark ? "bg-gray-600" : "bg-white"}`}>
             {/* <NavBar title={current} setCurrent={setCurrent} /> */}
 
-            <div className="h-24 p-6">
-                <div className="flex flex-row gap-x-8 mx-2 gap-4 flex-wrap">
+            <div className="h-8 p-6">
+                <div className="flex flex-row gap-x-8 mx-2 flex-wrap">
 
                 <button 
                 onClick={() => setCurrent("Resume") }
@@ -69,11 +71,18 @@ const JobSearch = () => {
                 onClick={() => setCurrent("Notes")} 
                 className={`font-semibold flex items-center ${current === "Notes" ? "border-b-2 border-indigo-400" : ""}`}>
                     Notes to Recruiters</button>
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Thank You Note</button>
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Interview Simulation</button>
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Complete Package</button>
-                <button className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold hover:bg-gray-400">Bullet Point Optimizer</button>
-                <button onClick={handleATSScan} className="bg-teal-500 p-2 text-white text-sm rounded-md font-semibold flex hover:bg-gray-400">ATS Scanner <ToolTips description={""} how={""} /> </button>
+               
+                <button 
+                onClick={() => setCurrent("Interview Prep")}
+                className={`font-semibold flex items-center ${current === "Interview Prep" ? "border-b-2 border-indigo-400" : ""}`}>
+                    Interview Prep
+                </button>
+
+                <button 
+                onClick={handleATSScan} 
+                className={`font-semibold flex items-center ${current === "ATS Scan" ? "border-b-2 border-indigo-400" : ""}`}>
+                    ATS Scanner 
+                    <ToolTips description={""} how={""} /> </button>
                 </div>
             </div>
 

@@ -16,5 +16,36 @@ model User {
   email     String   @unique
   name      String?
   password  String
+  school    String?
+  jobTitle  String?
+  resumes   Resume[]
+  coverLetters    CoverLetter[]
 }
+
+model Resume {
+  id        Int      @id @default(autoincrement())
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  sections  Section[]
+}
+
+model CoverLetter {
+  id        Int      @id @default(autoincrement())
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  
+}
+
+model Section {
+  id        Int      @id @default(autoincrement())
+  name      String
+  resume    Resume   @relation(fields: [resumeId], references: [id])
+  resumeId  Int
+  
+}
+
+
+
 
