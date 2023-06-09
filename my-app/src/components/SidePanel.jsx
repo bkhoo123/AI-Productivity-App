@@ -1,8 +1,12 @@
-import React, {useState} from 'react'
-
+import React, {useState, useEffect} from 'react'
+import ToolTips from './ToolTips'
 
 const SidePanel = ({activePanel, setActivePanel}) => {
-    const [current, setCurrent] = useState("Job Search")
+    const [current, setCurrent] = useState("JobSearch")
+
+    // useEffect(() => {
+    //     setCurrent("JobSearch")
+    // }, [])
 
     
     return (
@@ -13,7 +17,12 @@ const SidePanel = ({activePanel, setActivePanel}) => {
 
             <div className="flex justify-start flex-col mt-4">
 
-                <div onClick={() => {setActivePanel("JobSearch"); setCurrent("JobSearch")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "JobSearch" ? "border-l-4 border-indigo-500" : ""}`}> Job Search</div>
+                <div onClick={() => {setActivePanel("JobSearch"); setCurrent("JobSearch")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "JobSearch" ? "border-l-4 border-indigo-500" : ""}`}>Job Search 
+                <ToolTips
+                description="Job Search AI Tools"
+                how="Click on the Job Search Tab to see the AI Tools available for Job Search"
+                />
+                </div>
 
                 <div onClick={() => {setActivePanel("Ebay"); setCurrent("Ebay")}} className={`text-slate-600 font-bold w-full p-4 cursor-pointer ${current === "Ebay" ? "border-l-4 border-indigo-500" : ""}`}>eBay</div>
 

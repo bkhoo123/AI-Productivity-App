@@ -1,41 +1,16 @@
 import React, {useState} from 'react'
-import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; 
-import 'react-quill/dist/quill.bubble.css';  
-import 'react-quill/dist/quill.core.css';  
 import { PacmanLoader } from 'react-spinners';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import axios from 'axios'
+import ReactQuillBubble from '@/components/ReactQuill/ReactQuillBubble';
 
-const QuillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean'],
-    ],
-}
 
-const QuillFormats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-]
+
 
 const ResumeFeedback = () => {
     const [loading, setLoading] = useState(false)
-    const [content, setContent] = useState("")
+    const [resume, setResume] = useState("")
+    const [gpt, setGPT] = useState("")
     const [color, setColor] = useState("#7FFFD4")
-    const [quillInstance, setQuillInstance] = useState(null);
-
-    const copyContent = () => {
-        if (quillInstance) {
-            const text = quillInstance.getText();
-            navigator.clipboard.writeText(text);
-        }
-    };
 
     if (loading) {
         return (
@@ -48,45 +23,51 @@ const ResumeFeedback = () => {
                 </div>
                 <div className="text-2xl">Loading ....</div>
             </div>
-        
         )
     }
 
     const handleResumeFeedback = async (e) => {
         e.preventDefault()
         const payload = {
-            resume: content
+            resume: resume
         }
         setLoading(true)
 
         const response = await axios.post(`/api/ChatGPT/resume_optimizer`, payload)
 
         if (response) {
-            setContent(response.data.message.content)
+            setGPT(response.data.message.content)
             setLoading(false)
         }
     }
 
     return (
-        <div className="mt-8 mx-10 p-8 whitespace-pre-wrap border-2 rounded-md h-auto border-purple-300">
-        <div className="flex flex-row items-center gap-6">
-            <button onClick={copyContent} className="hover:bg-rose-200 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button>
-            <button onClick={() => setContent("")} className="hover:bg-rose-200 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path><path d="M22 21H7"></path><path d="m5 11 9 9"></path></svg></button>
-            <button onClick={handleResumeFeedback} className="bg-teal-400 hover:bg-stone-400 p-2 text-white font-semibold rounded-lg text-sm" >Generate Resume Feedback</button>
+        <>
+        <div className="m-10">
+            <div onClick={handleResumeFeedback} className="flex items-center border-2 border-black hover:bg-indigo-400 w-fit hover:text-white rounded-md p-2 cursor-pointer gap-2 font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><line x1="18" x2="22" y1="2" y2="6"></line><path d="M7.5 20.5 19 9l-4-4L3.5 16.5 2 22z"></path></svg>
+              Submit Resume for Feedback
+              </div>
         </div>
-            <ReactQuill 
-                theme="bubble"
-                placeholder="Put your Resume in here so that we can give you feedback on it."
-                value={content}
-                onChange={(content, delta, source, editor) => {
-                    setContent(content);
-                    setQuillInstance(editor);
-                }}
-                modules={QuillModules}
-                formats={QuillFormats}
-                preserveWhitespace={true}
-            />
-        </div>
+
+        <ReactQuillBubble
+        height="auto"
+        className="font-semibold border-none"
+        placeHolder="Copy and Paste your Resume in here and the AI will give you feedback on how to improve it, press the submit button when you're ready"
+        content={resume}
+        setContent={setResume}
+        eleClassName={"mx-10 my-8 p-8 border-teal-400 border-2 h-auto rounded-lg whitespace-pre-wrap "}
+        />
+
+        <ReactQuillBubble
+        height="auto"
+        className="font-semibold text-indigo-400"
+        placeHolder="The Artificial Intelligence will give you feedback on your resume here"
+        content={gpt}
+        setContent={setGPT}
+        eleClassName={"mx-10 my-8 p-8 border-teal-400 border-2 h-auto rounded-lg whitespace-pre-wrap "}
+        />
+        </>
     )
 }
 

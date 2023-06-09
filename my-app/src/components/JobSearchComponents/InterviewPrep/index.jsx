@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 const InterviewPrep = () => {
-    const [current, setCurrent] = useState("Technical Question Interviewer")
+    const [current, setCurrent] = useState("Question Creator")
 
     const InterviewPanel = {
         

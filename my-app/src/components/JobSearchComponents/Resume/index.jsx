@@ -15,17 +15,17 @@ const Resume = ({toggleDark, setToggleDark, loading, setLoading}) => {
     }
     
     return (
-        <div className="mt-10 border-t border-indigo-400 pt-8">
-            <h1 className="ml-10 font-bold text-2xl">{current}</h1>  
-            <div className="mt-6 ml-10 flex flex-row items-center gap-6 self-center">
+        <div className="mt-8 border-t border-indigo-400 pt-8">
+            {/* <h1 className="ml-10 font-bold text-2xl">{current}</h1>   */}
+            <div className="mt-2 ml-10 flex flex-row items-center gap-6 self-center">
                 
                 <button 
                     onClick={() => setCurrent("Create Resume Template")}
                     className={current === "Create Resume Template" ? "bg-gray-400 p-2 rounded-md flex font-semibold text-sm text-white" : "bg-sky-800 p-2 rounded-md flex font-semibold text-sm text-white"}>
                     Create Resume Template
                     <ToolTips
-                    description={"Create a resume template that you can use to apply to jobs."}
-                    how={"Click the Click Me to Get Started Button and it will ask you for some information"}
+                    description={"Creates a Resume Template"}
+                    how={"Click Generate Resume Template and it will ask you for some information to get started. "}
                     />
                 </button>
                 <button 
@@ -33,7 +33,7 @@ const Resume = ({toggleDark, setToggleDark, loading, setLoading}) => {
                     className={current === "Resume Feedback" ? "bg-gray-400 p-2 rounded-md flex font-semibold text-sm text-white" : "bg-sky-800 p-2 rounded-md flex font-semibold text-sm text-white"}>
                         Resume Feedback
                         <ToolTips 
-                        description={""}
+                        description={"AI Generated Resume Feedback"}
                         how={""}
                         />
                 </button>

@@ -5,7 +5,7 @@ import JobSearch from '@/components/JobSearch'
 import Ebay from '@/components/eBay/Ebay'
 
 const Dashboard = () => {
-    const [activePanel, setActivePanel] = useState('eBay')
+    const [activePanel, setActivePanel] = useState('JobSearch')
 
     const panels = {
       "JobSearch": <JobSearch />,

@@ -45,37 +45,46 @@ const JobSearch = () => {
         <div className={`w-full ${toggleDark ? "bg-gray-600" : "bg-white"}`}>
             {/* <NavBar title={current} setCurrent={setCurrent} /> */}
 
-            <div className="h-8 p-6">
+            <div className="h-8 p-5 px-6">
                 <div className="flex flex-row gap-x-8 mx-2 flex-wrap">
 
                 <button 
                 onClick={() => setCurrent("Resume") }
-                className={`font-semibold flex items-center ${current === "Resume" ? "border-b-2 border-indigo-400" : ""}`}>
+                className={`font-semibold flex items-center pb-1 ${current === "Resume" ? "border-b-2 border-indigo-400" : ""}`}>
                     Resume
                     <ToolTips 
-                    description={"Resume Creation and Optimization Tools and Features"} 
-                    how={"Click the Resume Button and you should see the Resume Tools appear below"}/>
+                    description={"Resume Creation and Optimization Tools"} 
+                    how={"Click the Resume Button and Resume Tools will appear below"}/>
                 </button>
 
 
                 <button  
                 onClick={() => setCurrent("Cover Letter")}
-                className={`font-semibold flex items-center ${current === "Cover Letter" ? "border-b-2 border-indigo-400" : ""}`}>
+                className={`font-semibold flex items-center pb-1 ${current === "Cover Letter" ? "border-b-2 border-indigo-400" : ""}`}>
                     Cover Letter
                     <ToolTips 
-                    description={"Cover Letter Creation and Optimization Tools and Features"} 
-                    how={"Click the Cover Letter Button and you should see the Cover Letter Tools appear below"} /> 
+                    description={"Cover Letter Creation and Optimization Tools"} 
+                    how={"Click the Cover Letter Button and Cover Letter Tools will appear below"} /> 
                 </button>
 
                 <button
                 onClick={() => setCurrent("Notes")} 
-                className={`font-semibold flex items-center ${current === "Notes" ? "border-b-2 border-indigo-400" : ""}`}>
-                    Notes to Recruiters</button>
-               
+                className={`font-semibold flex items-center pb-1 ${current === "Notes" ? "border-b-2 border-indigo-400" : ""}`}>
+                    Notes to Recruiters
+                    <ToolTips 
+                    description=""
+                    how=""
+                    />
+                    </button>
+                    
                 <button 
                 onClick={() => setCurrent("Interview Prep")}
-                className={`font-semibold flex items-center ${current === "Interview Prep" ? "border-b-2 border-indigo-400" : ""}`}>
+                className={`font-semibold flex items-center pb-1 ${current === "Interview Prep" ? "border-b-2 border-indigo-400" : ""}`}>
                     Interview Prep
+                    <ToolTips 
+                    description=""
+                    how=""
+                    />
                 </button>
 
                 <button 

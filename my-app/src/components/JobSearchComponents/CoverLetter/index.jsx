@@ -20,8 +20,8 @@ const CoverLetter = () => {
                     className={current === "Create Cover Letter" ? "bg-gray-400 p-2 rounded-md flex font-semibold text-sm text-white" : "bg-sky-800 p-2 rounded-md flex font-semibold text-sm text-white"}>
                         Create Cover Letter
                         <ToolTips 
-                        description={"Will create a cover letter for you based on the company you wish to make a cover letter for."}
-                        how={""}
+                        description={"Create a Cover Letter"}
+                        how={"Click Generate Cover Letter and it will ask you for some information to get started."}
                         />
                 </button>
 
