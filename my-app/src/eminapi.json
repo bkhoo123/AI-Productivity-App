@@ -1,0 +1,61 @@
+[
+  {
+    "creationTimeStamp": 1690823783.974371,
+    "distance": 891.6714241581323,
+    "endLat": 47.144416841375964,
+    "endLong": -121.30153327632739,
+    "endStreet": "(47.1369, -121.3054)",
+    "id": "YLxsFL6oQjosnNDKnfFt",
+    "isCurrentlyInRubbishRun": false,
+    "isSponsored": false,
+    "isValidated": false,
+    "lastUpdatedServerTimeStamp": {
+      "_seconds": 1690824804,
+      "_nanoseconds": 755000000
+    },
+    "lastUpdatedUserTimeStamp": 1690824804.6606889,
+    "litterNotPickedUpStats": {
+      "breakdown": {}
+    },
+    "litterPickedUpStats": {
+      "breakdown": {
+        "GGUKW05EqHIJT8zyNeom": 1
+      }
+    },
+    "modelVersion": 205,
+    "numberOfItemsNotPickedUp": 0,
+    "numberOfItemsPickedUp": 1,
+    "numberOfItemsTagged": 1,
+    "numberOfPictures": 1,
+    "numberOfPicturesNotPickedUp": 0,
+    "numberOfPicturesPickedUp": 1,
+    "photoStoryIDs": ["m3RA9SeolAOkLCLAVa7a"],
+    "privacyLevel": "privacyTeam",
+    "rubbishRunMode": "completed",
+    "rubbishRunStoryModelID": "YLxsFL6oQjosnNDKnfFt",
+    "serverTimeStamp": {
+      "_seconds": 1690824168,
+      "_nanoseconds": 958000000
+    },
+    "shouldRecalculateRubbishRunStats": false,
+    "startLat": 47.13694169656107,
+    "startLong": -121.30541341390582,
+    "startStreet": "(47.1369, -121.3054)",
+    "stepCount": 665,
+    "teamDisplayName": "No Trace Trails",
+    "teamID": "Kmi7ClumQbNpa2vh7l9c",
+    "thumbnailImages": [
+      "https://firebasestorage.googleapis.com/v0/b/rubbishproduction-411a1.appspot.com/o/StreetRubbishPhotos%2Fthumbnails%2Fm3RA9SeolAOkLCLAVa7a_138x300.jpg?alt=media"
+    ],
+    "totalRubbishRunTime": 399,
+    "totalRubbishRuns": 1,
+    "userFirstName": "Victoria",
+    "userID": "aVwuFIxr7VPW3LeOjm2bnl9ZpD33",
+    "userLastName": "McGruer",
+    "userName": "notracetrails",
+    "userProfilePhotoURL": "",
+    "userRoles": ["newUser"],
+    "userTimeStampEnd": 1690824802.7069368,
+    "userURI": "/User/aVwuFIxr7VPW3LeOjm2bnl9ZpD33"
+  }
+]

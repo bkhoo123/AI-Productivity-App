@@ -45,6 +45,7 @@ export default async function handler(req, res) {
             ],
             max_tokens: 1000,
             top_p: 0.1,
+            
             n: 1,
         })
 

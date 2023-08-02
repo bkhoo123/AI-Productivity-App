@@ -34,6 +34,8 @@ export default async function handler(req, res) {
             temperature: 0.5,
             n: 1,
         })
+
+        return res.status(200).json({ message: completion.data.choices[0].message })
     } catch (error) {
         console.error("Error generating resume optimization:", error)
         return res.status(500).json({ message: "An error occurred while generating the resume optimizations." })
