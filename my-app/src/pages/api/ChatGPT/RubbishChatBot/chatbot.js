@@ -5,7 +5,7 @@ import { Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
-  
+
 const openai = new OpenAIApi(configuration);
 const alotofData =
 [
@@ -5768,7 +5768,7 @@ let exampleSet = {
         "userTimeStamp": 1691971262.041613,
         "validationState": "awaitingReview"
     }
-    
+
 
 export default async function handler(req, res) {
     const {input} = req.body;
@@ -5778,59 +5778,60 @@ export default async function handler(req, res) {
 
 
     // send back the trimmed data to chat gpt to answer the users original question
-    // 1. api call for data 
+    // 1. api call for data
     // 2. trimgpt trims this data when user input is received calling the chatbot
     // 3. Clarification if needed - in the event that the users input is not relevant/enough for the chatbot to infer intent, then respond to user here asking for more clarification
     // 4. chatgpt awaits trimgpts data and uses it to answer the users question
     // Return result
-    
+
 
 
     try {
-         const completion = await openai.createChatCompletion({
-            // model: "gpt-3.5-turbo",
-            model: "gpt-3.5-turbo",
-            messages: [
-                // {
-                //     role: "assistant",
-                //     content: `You are a helpful chatbot assisting the user in answering his questions based on the data / reports given to you by the user. 
-                //     I need you to infer the users intent from their message. After inferring the users intent from the message, 
-                //     I want you send back a JSONified object with the key/value pairs from the data that I can keep - these must be key/value pairs that already exist in the dataset. 
-                //     I want you to minimize the amount of data that is relevant so I can send another instance of chatGPT the condensed data so I can minimize the token count and cost. 
-                //     Here is an example data set for you to reference ${JSON.stringify(exampleSet)}. Only return the object in your response.`
-                // },
-                {
-                    role: "system",
-                    content: `You're tasked with trimming down a dataset based on user's query. Here is the data: ${JSON.stringify(exampleSet)}. The user's query is: '${input}'. Please return a JSON object with only the relevant key-value pairs that are needed to answer the user's question.`
+        console.log("a lot of data", alotofData.length)
+        //  const completion = await openai.createChatCompletion({
+        //     // model: "gpt-3.5-turbo",
+        //     model: "gpt-3.5-turbo",
+        //     messages: [
+        //         // {
+        //         //     role: "assistant",
+        //         //     content: `You are a helpful chatbot assisting the user in answering his questions based on the data / reports given to you by the user.
+        //         //     I need you to infer the users intent from their message. After inferring the users intent from the message,
+        //         //     I want you send back a JSONified object with the key/value pairs from the data that I can keep - these must be key/value pairs that already exist in the dataset.
+        //         //     I want you to minimize the amount of data that is relevant so I can send another instance of chatGPT the condensed data so I can minimize the token count and cost.
+        //         //     Here is an example data set for you to reference ${JSON.stringify(exampleSet)}. Only return the object in your response.`
+        //         // },
+        //         {
+        //             role: "system",
+        //             content: `You're tasked with trimming down a dataset based on user's query. Here is the data: ${JSON.stringify(exampleSet)}. The user's query is: '${input}'. Please return a JSON object with only the relevant key-value pairs that are needed to answer the user's question.`
 
-                }, 
-                {
-                    role: "user",
-                    content: `${input}`
-                },
-                
-            ],
-            max_tokens: 500,
-            top_p: 0.1,
-            n: 1,
-         })
-        let myResObjJSON = completion.data.choices[0].message.content
-        console.log("my response data", completion.data.choices[0].message)
-        const myResObj = JSON.parse(myResObjJSON)
-        // content: '{\n  "totalNumberOfItemsTagged": 1\n}' }
-        console.log("my res obj", myResObj)
-        let newDataSet = []
-        for (let i = 0; i < alotofData.length; i++) {
-            let newObject = {};
-            const currDataPoint = alotofData[i]
-            for (const i in myResObj) {
-                newObject[i] = currDataPoint[i]
-            }
-            newDataSet.push(newObject)
-        }
-        let jsonnewData = JSON.stringify(newDataSet)
-        
-        console.log("checking my new dataset", newDataSet)
+        //         },
+        //         {
+        //             role: "user",
+        //             content: `${input}`
+        //         },
+
+        //     ],
+        //     max_tokens: 500,
+        //     top_p: 0.1,
+        //     n: 1,
+        //  })
+        // let myResObjJSON = completion.data.choices[0].message.content
+        // console.log("my response data", completion.data.choices[0].message)
+        // const myResObj = JSON.parse(myResObjJSON)
+        // // content: '{\n  "totalNumberOfItemsTagged": 1\n}' }
+        // console.log("my res obj", myResObj)
+        // let newDataSet = []
+        // for (let i = 0; i < alotofData.length; i++) {
+        //     let newObject = {};
+        //     const currDataPoint = alotofData[i]
+        //     for (const i in myResObj) {
+        //         newObject[i] = currDataPoint[i]
+        //     }
+        //     newDataSet.push(newObject)
+        // }
+        // let jsonnewData = JSON.stringify(newDataSet)
+
+        // console.log("checking my new dataset", newDataSet, newDataSet.length, newDataSet[0]);
         // const completion2 = await openai.createChatCompletion({
         //     model: "gpt-3.5-turbo",
         //     messages: [
@@ -5876,46 +5877,44 @@ export default async function handler(req, res) {
 
         // First draft - simple summary of a small subset of data, not cleaned up
         // return res.status(200).json({ message: completion.data.choices[0].message });
-        const completion2 = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo-16k",
-            messages: [
-                {
-                    role: "system",
-                    content: "You are a helpful chatbot assisting the user in answering his questions based on the data / reports given to you by the user. You will answer the questions as concisely as possible. You will also have the chat history between you and the user so you will remember the conversation."
-                },
-                {
-                    role: "user",
-                    content: "Hi can you help me with answering my questions concisely regarding my data for this website. I want you to be a chatbot that will help users answer questions regarding the data on these reports"
-                },
-                {
-                    role: "assistant",
-                    content: "Of course I can help answer any questions you may have regarding your reports. What questions do you have?"
-                },
-                {
-                    role: "user",
-                    content: `Here is the data ${jsonnewData}`
-                }, 
-                {
-                    role: "assistant", 
-                    content: "Yes I see the data, what questions do you have regarding the data?"
-                }, 
-                {
-                    role: "user",
-                    content: `${input}`  
-                }
-            ],
-            max_tokens: 500,
-            top_p: 0.1,
-            n: 1,
-        })
-        // console.log(completion2.data.choices[0].message)
+        // const completion2 = await openai.createChatCompletion({
+        //     model: "gpt-3.5-turbo-16k",
+        //     messages: [
+        //         {
+        //             role: "system",
+        //             content: "You are a helpful chatbot assisting the user in answering his questions based on the data / reports given to you by the user. You will answer the questions as concisely as possible. You will also have the chat history between you and the user so you will remember the conversation."
+        //         },
+        //         {
+        //             role: "user",
+        //             content: "Hi can you help me with answering my questions concisely regarding my data for this website. I want you to be a chatbot that will help users answer questions regarding the data on these reports"
+        //         },
+        //         {
+        //             role: "assistant",
+        //             content: "Of course I can help answer any questions you may have regarding your reports. What questions do you have?"
+        //         },
+        //         {
+        //             role: "user",
+        //             content: `Here is the data ${jsonnewData}`
+        //         },
+        //         {
+        //             role: "assistant",
+        //             content: "Yes I see the data, what questions do you have regarding the data?"
+        //         },
+        //         {
+        //             role: "user",
+        //             content: `${input}`
+        //         }
+        //     ],
+        //     max_tokens: 500,
+        //     top_p: 0.1,
+        //     n: 1,
+        // })
+        // // console.log(completion2.data.choices[0].message)
 
-        return res.status(200).json({ message: completion2.data.choices[0].message });
+        // return res.status(200).json({ message: completion2.data.choices[0].message });
 
     } catch (error) {
         console.error("Error generating Rubbish Chatbot Response:", error)
         return res.status(500).json({ message: "An error occurred while generating chatbot response" })
     }
 }
-
-
