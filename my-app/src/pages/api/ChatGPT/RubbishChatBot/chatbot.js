@@ -5901,7 +5901,7 @@ export default async function handler(req, res) {
     console.log(summaries.join(". Next GPT summary: "));
 
     const completion2 = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4",
       messages: [
         {
           role: "system",
