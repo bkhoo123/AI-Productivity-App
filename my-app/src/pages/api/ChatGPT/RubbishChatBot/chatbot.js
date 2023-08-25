@@ -5847,18 +5847,16 @@ let exampleSet = {
 export default async function handler(req, res) {
   const { input } = req.body;
   console.log(input);
-  // Get the user input, infer their intent, from that, we decide what data to delete
-  // Chat GPT sends us a JSON objecet with all key/values to delete
 
-  // send back the trimmed data to chat gpt to answer the users original question
-  // 1. api call for data
-  // 2. trimgpt trims this data when user input is received calling the chatbot
-  // 3. Clarification if needed - in the event that the users input is not relevant/enough for the chatbot to infer intent, then respond to user here asking for more clarification
-  // 4. chatgpt awaits trimgpts data and uses it to answer the users question
-  // Return result
+  // Chatbot Logic
+  // 1. Turn user input into a modified API Url request
+  // 2. Clump the data into chunks to make sure managable size data sent to gpt
+  // 3. Then summarize with different GPT instances
+  // 4. GPT 4.0 summarizes the results
+  // 5. Return the final summary
 
   try {
-    // Step 0. Get data from Rubbish API. Chat GPT will help us determine the API call to make
+    // Step 1: Use GPT to determine the API call based on user input
     const completion0 = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
@@ -5880,6 +5878,7 @@ export default async function handler(req, res) {
       top_p: 0.1,
       n: 1,
     });
+
     const url = completion0.data.choices[0].message.content;
     console.log("checking response", url);
 
@@ -5887,7 +5886,9 @@ export default async function handler(req, res) {
     const urlPattern =
       /^https:\/\/qr-dev\.rubbish\.love\/public\/api\/v1\/reports\/[a-zA-Z0-9]+\/get/;
 
+    // Check if the response is a valid API URL
     if (urlPattern.test(url)) {
+      // Fetch data from the Rubbish API
       let data, response;
 
       var myHeaders = new Headers();
@@ -5913,14 +5914,12 @@ export default async function handler(req, res) {
       console.log("checking the response", response);
       console.log("checking the response data", data);
 
-      // Call Rubbish API here:
-
-      // 1. Chunk data by Rubbish Type
+      // Step 2: Chunk the data by Rubbish Type for manageable processing
       let chunks = chunkDataByRubbishType(data);
 
-      // 2. For each chunk, send a prompt to ChatGPT
       let summaries = [];
 
+      // Step 3: Summarize each chunk using GPT
       for (let i = 0; i < chunks.length; i++) {
         console.log("checking currchunk", chunks[i].length);
         let completion;
@@ -5961,9 +5960,9 @@ export default async function handler(req, res) {
       }
 
       console.log("checking summaries here", summaries, summaries.length);
-
       console.log(summaries.join(". Next GPT summary: "));
 
+      // Step 4: Use GPT 4.0 to consolidate and summarize the results
       const completion2 = await openai.createChatCompletion({
         model: "gpt-4",
         messages: [
@@ -5983,6 +5982,7 @@ export default async function handler(req, res) {
         message: completion2.data.choices[0].message,
       });
     } else {
+      // If the response is not a valid API URL from Step 1, return the response as is
       return res
         .status(200)
         .json({ message: completion0.data.choices[0].message });
